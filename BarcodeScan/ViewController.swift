@@ -19,6 +19,7 @@ class ViewController: UIViewController {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
             guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else {
+                print("Devices not support video processing")
                 return
             }
             
@@ -27,12 +28,14 @@ class ViewController: UIViewController {
             do {
                 videoInput = try AVCaptureDeviceInput(device: videoCaptureDevice)
             }catch{
+                print("Devices not give video input data")
                 return
             }
             
             if (self.captureSession.canAddInput(videoInput)){
                 self.captureSession.addInput(videoInput)
             }else{
+                print("Devices cannot add input in capture session")
                 return
             }
             
