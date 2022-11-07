@@ -69,9 +69,16 @@ extension ViewController: AVCaptureMetadataOutputObjectsDelegate {
             guard let stringValue = readableObject.stringValue else {
                 return
             }
+            
+            found(code: stringValue)
+            
         }else{
             print("Not able to read the code! Please try again")
         }
+    }
+    
+    func found(code: String){
+        print(code)
     }
 }
 
