@@ -58,7 +58,20 @@ class ViewController: UIViewController {
             self.captureSession.startRunning()
         })
     }
+}
 
-
+extension ViewController: AVCaptureMetadataOutputObjectsDelegate {
+    func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
+        if let first = metadataObjects.first {
+            guard let readableObject = first as? AVMetadataMachineReadableCodeObject else {
+                return
+            }
+            guard let stringValue = readableObject.stringValue else {
+                return
+            }
+        }else{
+            print("Not able to read the code! Please try again")
+        }
+    }
 }
 
